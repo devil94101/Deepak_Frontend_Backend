@@ -1,0 +1,30 @@
+<mat-card>
+  <form class="example-form" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Height</mat-label>
+    <input matInput type="number" [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+           placeholder="height" [(ngModel)]="height" >
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Height is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('max')">
+      Height should be less than 100
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('min')">
+      Height should be more than 0
+    </mat-error>
+  </mat-form-field>
+  <mat-slider min="0" max="1" step="0.01" thumbLabel
+  [displayWith]="formatLabel" name="coeff" 
+  (input)="value = $event.value" 
+  value="value"></mat-slider>
+
+  <button class="btn btn-primary"> submit </button>
+</form>
+</mat-card>
+<p *ngIf="check();else add">data not added</p>
+<ng-template #add><app-graph [(formData)]="data"></app-graph>
+<p>Number of bounces are {{bounces}}</p>
+</ng-template>
+<!-- <app-graph [(inputData)]="height"></app-graph> -->
